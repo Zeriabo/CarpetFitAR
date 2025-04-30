@@ -22,13 +22,18 @@ const ARCarpetViewer = () => {
     const modelSrc =
       Platform.OS === 'android'
         ? 'https://github.com/riderodd/react-native-ar/blob/main/example/src/dice.usdz?raw=true'
-        : 'https://github.com/Zeriabo/carpetfitAug/blob/master/assets/models/carpet1.usdz?raw=true';
+        : 'https://raw.githubusercontent.com/Zeriabo/carpetfitAug/master/assets/models/carpet1.usdz';
 
     const localModelPath = `${RNFS.DocumentDirectoryPath}/model.${extension}`;
 
     console.log('Model will be saved at:', localModelPath);
 
     const exists = await RNFS.exists(localModelPath);
+    if (exists) {
+      const stat = await RNFS.stat(localModelPath);
+      console.log('Downloaded model path:', localModelPath);
+      console.log('File size:', stat.size);
+    }
     if (!exists) {
       console.log('Model does not exist, downloading...');
       await RNFS.downloadFile({
@@ -39,8 +44,8 @@ const ARCarpetViewer = () => {
     } else {
       console.log('Model already exists locally.');
     }
-
     setModelPath(localModelPath);
+    console.log('model path is :  ' + modelPath);
   };
 
   return (

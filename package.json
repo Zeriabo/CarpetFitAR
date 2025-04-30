@@ -17,6 +17,7 @@
     "react-native-ar-viewer": "^0.1.17",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.25.0",
+    "react-native-paper": "^5.13.5",
     "react-native-reanimated": "^3.17.4",
     "react-native-safe-area-context": "^5.4.0",
     "react-native-screens": "^4.10.0"

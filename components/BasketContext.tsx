@@ -12,8 +12,14 @@ export const BasketProvider = ({children}: any) => {
   const clearBasket = () => {
     setBasket([]);
   };
-  const removeFromBasket = (itemId: any) => {
-    setBasket(prev => prev.filter(item => item !== itemId));
+  const removeFromBasket = (itemId: string) => {
+    setBasket(prev => {
+      const index = prev.indexOf(itemId);
+      if (index > -1) {
+        return [...prev.slice(0, index), ...prev.slice(index + 1)];
+      }
+      return prev;
+    });
   };
 
   return (

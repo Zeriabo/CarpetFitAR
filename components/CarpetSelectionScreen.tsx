@@ -11,9 +11,9 @@ import {useBasket} from './BasketContext';
 import {Button, IconButton, Badge} from 'react-native-paper';
 import Icon from '@react-native-vector-icons/fontawesome6';
 const carpets = [
-  {id: '1.png', image: require('../assets/images/1.png')},
-  {id: '2.png', image: require('../assets/images/2.png')},
-  {id: '3.png', image: require('../assets/images/3.png')},
+  {id: 'perisian', image: require('../assets/images/1.png')},
+  {id: 'ajam', image: require('../assets/images/2.png')},
+  {id: 'italian', image: require('../assets/images/3.png')},
 ];
 
 const CarpetSelectionScreen = ({navigation}: any) => {

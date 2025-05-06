@@ -12,6 +12,8 @@ import {
 import {View, StyleSheet, ImageBackground} from 'react-native';
 import ARCarpetViewer from './components/ARCarpetViewer';
 import CarpetSelectionScreen from './components/CarpetSelectionScreen';
+import {BasketProvider} from './components/BasketContext';
+import BasketScreen from './screens/BasketScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +23,7 @@ const HomeScreen = ({navigation}: any) => (
     style={styles.container}
     blurRadius={1}>
     <View style={styles.overlay}>
-      <Card style={styles.card}>
+      <Card style={styles.transparentCard}>
         <Card.Content>
           <Title style={styles.title}>CarpetVision AR</Title>
           <Paragraph style={styles.subtitle}>
@@ -32,21 +34,11 @@ const HomeScreen = ({navigation}: any) => (
             onPress={() => navigation.navigate('CarpetSelection')}
             style={styles.button}
             labelStyle={styles.buttonLabel}
-            icon="augmented-reality">
+            icon="cube-scan">
             Start AR Experience
           </Button>
         </Card.Content>
       </Card>
-
-      <View style={styles.features}>
-        {['📏 Perfect Fit', '🎨 Color Match', '🛒 Shop Direct'].map(feature => (
-          <Card key={feature} style={styles.featureCard}>
-            <Card.Content style={styles.featureContent}>
-              <Paragraph>{feature}</Paragraph>
-            </Card.Content>
-          </Card>
-        ))}
-      </View>
     </View>
   </ImageBackground>
 );
@@ -54,34 +46,41 @@ const HomeScreen = ({navigation}: any) => (
 const App = () => {
   return (
     <PaperProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            header: ({navigation}) => (
-              <Appbar.Header>
-                <Appbar.BackAction onPress={() => navigation.goBack()} />
-                <Appbar.Content title="CarpetVision" />
-              </Appbar.Header>
-            ),
-          }}>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="CarpetSelection"
-            component={CarpetSelectionScreen}
-            options={{title: 'Select Carpet'}}
-          />
+      <BasketProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              header: ({navigation}) => (
+                <Appbar.Header>
+                  <Appbar.BackAction onPress={() => navigation.goBack()} />
+                  <Appbar.Content title="CarpetVision" />
+                </Appbar.Header>
+              ),
+            }}>
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Basket"
+              component={BasketScreen}
+              options={{title: 'Your Basket'}}
+            />
+            <Stack.Screen
+              name="CarpetSelection"
+              component={CarpetSelectionScreen}
+              options={{title: 'Select Carpet'}}
+            />
 
-          <Stack.Screen
-            name="ARCarpet"
-            component={ARCarpetViewer}
-            options={{title: 'AR Viewer'}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+            <Stack.Screen
+              name="ARCarpet"
+              component={ARCarpetViewer}
+              options={{title: 'AR Viewer'}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </BasketProvider>
     </PaperProvider>
   );
 };
@@ -96,21 +95,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 20,
   },
-  card: {
-    borderRadius: 12,
-    elevation: 4,
-    backgroundColor: 'rgba(255,255,255,0.9)',
+  transparentCard: {
+    backgroundColor: 'transparent',
+    elevation: 0,
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 8,
+    color: '#fff',
   },
   subtitle: {
     textAlign: 'center',
     marginBottom: 24,
     fontSize: 16,
+    color: '#fff',
   },
   button: {
     marginVertical: 16,
@@ -120,20 +120,6 @@ const styles = StyleSheet.create({
   },
   buttonLabel: {
     fontSize: 16,
-  },
-  features: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 24,
-  },
-  featureCard: {
-    width: '30%',
-    borderRadius: 8,
-    backgroundColor: 'rgba(255,255,255,0.8)',
-  },
-  featureContent: {
-    alignItems: 'center',
-    paddingVertical: 12,
   },
 });
 

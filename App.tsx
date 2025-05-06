@@ -11,6 +11,7 @@ import {
 } from 'react-native-paper';
 import {View, StyleSheet, ImageBackground} from 'react-native';
 import ARCarpetViewer from './components/ARCarpetViewer';
+import CarpetSelectionScreen from './components/CarpetSelectionScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +29,7 @@ const HomeScreen = ({navigation}: any) => (
           </Paragraph>
           <Button
             mode="contained"
-            onPress={() => navigation.navigate('ARCarpet')}
+            onPress={() => navigation.navigate('CarpetSelection')}
             style={styles.button}
             labelStyle={styles.buttonLabel}
             icon="augmented-reality">
@@ -68,6 +69,12 @@ const App = () => {
             component={HomeScreen}
             options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="CarpetSelection"
+            component={CarpetSelectionScreen}
+            options={{title: 'Select Carpet'}}
+          />
+
           <Stack.Screen
             name="ARCarpet"
             component={ARCarpetViewer}

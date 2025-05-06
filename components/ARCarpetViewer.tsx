@@ -1,72 +1,64 @@
-import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Platform,
-  StyleSheet,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, Platform, StyleSheet} from 'react-native';
 import {ArViewerView} from 'react-native-ar-viewer';
 import RNFS from 'react-native-fs';
 
-const ARCarpetViewer = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+const modelMap: {[key: string]: string} = {
+  '1.png':
+    Platform.OS === 'android'
+      ? 'https://raw.githubusercontent.com/Zeriabo/carpetfitAug/master/assets/models/carpet1.glb'
+      : 'https://raw.githubusercontent.com/Zeriabo/carpetfitAug/master/assets/models/carpet1.usdz',
+  '2.png':
+    Platform.OS === 'android'
+      ? 'https://raw.githubusercontent.com/Zeriabo/carpetfitAug/master/assets/models/carpet2.glb'
+      : 'https://raw.githubusercontent.com/Zeriabo/carpetfitAug/master/assets/models/carpet2.usdz',
+  '3.png':
+    Platform.OS === 'android'
+      ? 'https://dl.dropboxusercontent.com/scl/fi/i6fuipr0n07147t2kqa28/carpet3.glb?rlkey=aq43i8y8zzixsiarx6q3ow6jo&st=fh50whfr'
+      : 'https://dl.dropboxusercontent.com/scl/fi/i6fuipr0n07147t2kqa28/carpet3.usdz?rlkey=aq43i8y8zzixsiarx6q3ow6jo&st=fh50whfr',
+};
+
+const ARCarpetViewer = ({route}: any) => {
+  const {imageName} = route.params;
   const [modelPath, setModelPath] = useState<string>('');
 
-  const handleImageSelection = async (imageName: string) => {
-    console.log('Image selection');
-    setSelectedImage(imageName);
+  useEffect(() => {
+    const loadModel = async () => {
+      const extension = Platform.OS === 'android' ? 'glb' : 'usdz';
+      const modelSrc = modelMap[imageName];
+      const localModelPath = `${RNFS.DocumentDirectoryPath}/model_${imageName}.${extension}`;
+      if (Platform.OS === 'ios') {
+        setModelPath(localModelPath);
+        return;
+      }
+      try {
+        const exists = await RNFS.exists(localModelPath);
+        if (!exists) {
+          const result = await RNFS.downloadFile({
+            fromUrl: modelSrc,
+            toFile: localModelPath,
+          }).promise;
 
-    const extension = Platform.OS === 'android' ? 'glb' : 'usdz';
-    const modelSrc =
-      Platform.OS === 'android'
-        ? 'https://github.com/riderodd/react-native-ar/blob/main/example/src/dice.usdz?raw=true'
-        : 'https://raw.githubusercontent.com/Zeriabo/carpetfitAug/master/assets/models/carpet1.usdz';
+          if (result.statusCode === 200) {
+            console.log('Model downloaded:', localModelPath);
+          } else {
+            console.error('Download failed with status:', result.statusCode);
+            return;
+          }
+        } else {
+          console.log('Model already exists:', localModelPath);
+        }
+        setModelPath(localModelPath);
+      } catch (err) {
+        console.error('Error loading model:', err);
+      }
+    };
 
-    const localModelPath = `${RNFS.DocumentDirectoryPath}/model.${extension}`;
-
-    console.log('Model will be saved at:', localModelPath);
-
-    const exists = await RNFS.exists(localModelPath);
-    if (exists) {
-      const stat = await RNFS.stat(localModelPath);
-      console.log('Downloaded model path:', localModelPath);
-      console.log('File size:', stat.size);
-    }
-    if (!exists) {
-      console.log('Model does not exist, downloading...');
-      await RNFS.downloadFile({
-        fromUrl: modelSrc,
-        toFile: localModelPath,
-      }).promise;
-      console.log('Model downloaded successfully.');
-    } else {
-      console.log('Model already exists locally.');
-    }
-    setModelPath(localModelPath);
-    console.log('model path is :  ' + modelPath);
-  };
-
+    loadModel();
+  }, [imageName]);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>AR Carpet Viewer</Text>
-
-      {/* Image Selection */}
-      <View style={styles.imageContainer}>
-        <TouchableOpacity onPress={() => handleImageSelection('1.png')}>
-          <Image
-            source={require('../assets/images/1.png')}
-            style={styles.image}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleImageSelection('2.png')}>
-          <Image
-            source={require('../assets/images/1.png')}
-            style={styles.image}
-          />
-        </TouchableOpacity>
-      </View>
 
       {/* AR Viewer */}
       {modelPath && (
@@ -86,13 +78,6 @@ const ARCarpetViewer = () => {
           onModelPlaced={() => console.log('Model Placed')}
           onModelRemoved={() => console.log('Model Removed')}
         />
-      )}
-
-      {/* Display selected image info */}
-      {selectedImage && (
-        <Text style={styles.selectedText}>
-          Selected Carpet: {selectedImage}
-        </Text>
       )}
     </View>
   );

@@ -4,15 +4,15 @@ import {ArViewerView} from 'react-native-ar-viewer';
 import RNFS from 'react-native-fs';
 
 const modelMap: {[key: string]: string} = {
-  '1.png':
+  '1.perisian':
     Platform.OS === 'android'
       ? 'https://raw.githubusercontent.com/Zeriabo/carpetfitAug/master/assets/models/carpet1.glb'
       : 'https://raw.githubusercontent.com/Zeriabo/carpetfitAug/master/assets/models/carpet1.usdz',
-  '2.png':
+  '2.ajam':
     Platform.OS === 'android'
       ? 'https://raw.githubusercontent.com/Zeriabo/carpetfitAug/master/assets/models/carpet2.glb'
       : 'https://raw.githubusercontent.com/Zeriabo/carpetfitAug/master/assets/models/carpet2.usdz',
-  '3.png':
+  '3.italian':
     Platform.OS === 'android'
       ? 'https://dl.dropboxusercontent.com/scl/fi/i6fuipr0n07147t2kqa28/carpet3.glb?rlkey=aq43i8y8zzixsiarx6q3ow6jo&st=fh50whfr'
       : 'https://dl.dropboxusercontent.com/scl/fi/i6fuipr0n07147t2kqa28/carpet3.usdz?rlkey=aq43i8y8zzixsiarx6q3ow6jo&st=fh50whfr',
@@ -26,21 +26,22 @@ const ARCarpetViewer = ({route}: any) => {
     const loadModel = async () => {
       const extension = Platform.OS === 'android' ? 'glb' : 'usdz';
       const modelSrc = modelMap[imageName];
-      const localModelPath = `${RNFS.DocumentDirectoryPath}/model_${imageName}.${extension}`;
-      if (Platform.OS === 'ios') {
-        setModelPath(localModelPath);
-        return;
-      }
+
+      const renamedId = imageName;
+      const localModelPath = `${RNFS.DocumentDirectoryPath}/${renamedId}.${extension}`;
+
       try {
         const exists = await RNFS.exists(localModelPath);
         if (!exists) {
+          console.log(`Downloading and saving as: ${localModelPath}`);
+
           const result = await RNFS.downloadFile({
             fromUrl: modelSrc,
             toFile: localModelPath,
           }).promise;
 
           if (result.statusCode === 200) {
-            console.log('Model downloaded:', localModelPath);
+            console.log('Model downloaded and saved as:', localModelPath);
           } else {
             console.error('Download failed with status:', result.statusCode);
             return;
@@ -48,6 +49,7 @@ const ARCarpetViewer = ({route}: any) => {
         } else {
           console.log('Model already exists:', localModelPath);
         }
+
         setModelPath(localModelPath);
       } catch (err) {
         console.error('Error loading model:', err);

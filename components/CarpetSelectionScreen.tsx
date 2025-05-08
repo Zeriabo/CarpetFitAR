@@ -8,13 +8,13 @@ import {
   ImageBackground,
 } from 'react-native';
 import {useBasket} from './BasketContext';
-import {Button, IconButton, Badge} from 'react-native-paper';
-import Icon from '@react-native-vector-icons/fontawesome6';
+import {IconButton, Badge} from 'react-native-paper';
+import Icon from '@react-native-vector-icons/FontAwesome6'; // corrected casing
 
 const carpets = [
-  {id: '1.perisian', image: require('../assets/images/1.png')},
-  {id: '2.ajam', image: require('../assets/images/2.png')},
-  {id: '3.italian', image: require('../assets/images/3.png')},
+  {id: '1.perisian', image: require('../assets/images/1.png'), price: 200},
+  {id: '2.ajam', image: require('../assets/images/2.png'), price: 150},
+  {id: '3.italian', image: require('../assets/images/3.png'), price: 180},
 ];
 
 const CarpetSelectionScreen = ({navigation}: any) => {
@@ -26,12 +26,26 @@ const CarpetSelectionScreen = ({navigation}: any) => {
       style={styles.container}
       blurRadius={1}>
       <View style={styles.overlay}>
+        {/* 🛒 Basket Icon at top right */}
+        <View style={styles.basketIconContainer}>
+          <IconButton
+            icon="cart-outline"
+            size={28}
+            onPress={() => navigation.navigate('Basket')}
+            style={styles.basketIcon}
+          />
+          {basket.length > 0 && (
+            <Badge style={styles.badge}>{basket.length}</Badge>
+          )}
+        </View>
+
         <Text style={styles.title}>Select a Carpet</Text>
 
         <View style={styles.imageContainer}>
           {carpets.map(carpet => (
             <View key={carpet.id} style={styles.carpetCard}>
               <View style={styles.imageWrapper}>
+                <Text style={styles.priceText}>${carpet.price}</Text>
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate('ARCarpet', {imageName: carpet.id})
@@ -42,7 +56,7 @@ const CarpetSelectionScreen = ({navigation}: any) => {
                   icon="cart-plus"
                   size={24}
                   style={styles.iconButton}
-                  onPress={() => addToBasket(carpet.id)}
+                  onPress={() => addToBasket(carpet)}
                 />
               </View>
               <Text style={styles.carpetLabel}>
@@ -50,20 +64,6 @@ const CarpetSelectionScreen = ({navigation}: any) => {
               </Text>
             </View>
           ))}
-        </View>
-
-        <View style={styles.basketContainer}>
-          <Button
-            mode="contained"
-            onPress={() => navigation.navigate('Basket')}
-            style={styles.viewBasketButton}
-            icon="cart-outline">
-            View Basket
-          </Button>
-
-          {basket.length > 0 && (
-            <Badge style={styles.badge}>{basket.length}</Badge>
-          )}
         </View>
       </View>
     </ImageBackground>
@@ -76,12 +76,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.4)',
     padding: 20,
-    justifyContent: 'center',
+  },
+  basketIconContainer: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+  },
+  basketIcon: {
+    backgroundColor: 'white',
+  },
+  badge: {
+    position: 'absolute',
+    top: 4,
+    right: 4,
+    backgroundColor: 'red',
+    color: '#fff',
   },
   title: {
     fontSize: 28,
     textAlign: 'center',
-    marginVertical: 20,
+    marginTop: 80,
+    marginBottom: 20,
     fontWeight: 'bold',
     color: '#fff',
   },
@@ -90,6 +105,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: 20,
   },
+  priceText: {
+    color: '#ffd700',
+    fontSize: 14,
+    fontWeight: '500',
+  },
+
   carpetCard: {
     alignItems: 'center',
     width: 110,
@@ -115,21 +136,6 @@ const styles = StyleSheet.create({
     marginTop: 8,
     color: '#fff',
     fontWeight: 'bold',
-  },
-  basketContainer: {
-    marginTop: 30,
-    alignItems: 'center',
-  },
-  viewBasketButton: {
-    backgroundColor: '#6200ee',
-    width: '60%',
-  },
-  badge: {
-    position: 'absolute',
-    top: -8,
-    right: '20%',
-    backgroundColor: 'red',
-    color: '#fff',
   },
 });
 

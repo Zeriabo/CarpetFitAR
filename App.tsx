@@ -25,7 +25,7 @@ const HomeScreen = ({navigation}: any) => (
     <View style={styles.overlay}>
       <Card style={styles.transparentCard}>
         <Card.Content>
-          <Title style={styles.title}>CarpetVision AR</Title>
+          <Title style={styles.title}>CarpetVision</Title>
           <Paragraph style={styles.subtitle}>
             Visualize carpets in your space with augmented reality
           </Paragraph>
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     borderRadius: 8,
     paddingVertical: 8,
-    backgroundColor: '#6200ee',
+    backgroundColor: 'silver',
   },
   buttonLabel: {
     fontSize: 16,

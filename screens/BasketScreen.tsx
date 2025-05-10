@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   buyButton: {
     marginTop: 20,
     borderRadius: 25,
-    backgroundColor: '#1a8cff',
+    backgroundColor: 'silver',
   },
   buyButtonLabel: {
     fontSize: 16,

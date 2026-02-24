@@ -7,7 +7,12 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
+<<<<<<< HEAD
+    "test": "jest",
+    "postinstall": "patch-package"
+=======
     "test": "jest"
+>>>>>>> origin/master
   },
   "dependencies": {
     "@react-native-vector-icons/evil-icons": "^12.0.0",
@@ -19,11 +24,20 @@
     "react-native-ar-viewer": "^0.1.17",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.25.0",
+<<<<<<< HEAD
+    "react-native-paper": "^5.15.0",
+    "react-native-reanimated": "^3.17.4",
+    "react-native-safe-area-context": "^5.4.0",
+    "react-native-screens": "4.10.0",
+    "react-native-svg": "^15.15.3",
+    "react-native-vector-icons": "^10.3.0"
+=======
     "react-native-paper": "^5.13.5",
     "react-native-reanimated": "^3.17.4",
     "react-native-safe-area-context": "^5.4.0",
     "react-native-screens": "^4.10.0",
     "react-native-vector-icons": "^10.2.0"
+>>>>>>> origin/master
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -41,6 +55,10 @@
     "@types/react-test-renderer": "^19.0.0",
     "eslint": "^8.19.0",
     "jest": "^29.6.3",
+<<<<<<< HEAD
+    "patch-package": "^8.0.1",
+=======
+>>>>>>> origin/master
     "prettier": "2.8.8",
     "react-test-renderer": "19.0.0",
     "typescript": "5.0.4"

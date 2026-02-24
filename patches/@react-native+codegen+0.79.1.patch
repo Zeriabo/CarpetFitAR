@@ -1,0 +1,41 @@
+diff --git a/node_modules/@react-native/codegen/lib/parsers/typescript/components/componentsUtils.js b/node_modules/@react-native/codegen/lib/parsers/typescript/components/componentsUtils.js
+index 3ba47fe..bca3648 100644
+--- a/node_modules/@react-native/codegen/lib/parsers/typescript/components/componentsUtils.js
++++ b/node_modules/@react-native/codegen/lib/parsers/typescript/components/componentsUtils.js
+@@ -324,8 +324,15 @@ function getTypeAnnotationForArray(
+         type: 'FloatTypeAnnotation',
+       };
+     default:
+-      type;
+-      throw new Error(`Unknown prop type for "${name}": ${type}`);
++      // Array element type could not be resolved (e.g. a custom interface or
++      // complex generic).  Fall back to mixed so codegen continues rather than
++      // crashing; the generated code will simply treat the elements as `any`.
++      console.warn(
++        `codegen: unknown array element type for "${name}", falling back to mixed (was ${type})`,
++      );
++      return {
++        type: 'MixedTypeAnnotation',
++      };
+   }
+ }
+ function setDefaultValue(common, defaultValue) {
+@@ -407,7 +414,17 @@ function getTypeAnnotation(
+         `Cannot use "${type}" type annotation for "${name}": must use a specific function type like BubblingEventHandler, or DirectEventHandler`,
+       );
+     default:
+-      throw new Error(`Unknown prop type for "${name}": "${type}"`);
++      // If the parser can't resolve a type (often due to complex generics or
++      // third‑party types) we don't want the entire build to fail.  Instead
++      // fall back to a mixed/any annotation which will preserve the prop but
++      // treat it as untyped on the native side.
++      //
++      // This mirrors behavior in other codegen branches and makes upgrading
++      // libraries far more forgiving.
++      console.warn(`codegen: unknown prop type for "${name}", falling back to mixed (was \"${type}\")`);
++      return {
++        type: 'MixedTypeAnnotation',
++      };
+   }
+ }
+ function getSchemaInfo(property, types) {

@@ -5,10 +5,18 @@ import {
   Provider as PaperProvider,
   Appbar,
   Button,
+<<<<<<< HEAD
   Text,
   MD3LightTheme,
 } from 'react-native-paper';
 import {View, StyleSheet, ImageBackground, ScrollView} from 'react-native';
+=======
+  Card,
+  Title,
+  Paragraph,
+} from 'react-native-paper';
+import {View, StyleSheet, ImageBackground} from 'react-native';
+>>>>>>> origin/master
 import ARCarpetViewer from './components/ARCarpetViewer';
 import CarpetSelectionScreen from './components/CarpetSelectionScreen';
 import {BasketProvider} from './components/BasketContext';
@@ -16,6 +24,7 @@ import BasketScreen from './screens/BasketScreen';
 
 const Stack = createNativeStackNavigator();
 
+<<<<<<< HEAD
 // Modern Material Design 3 theme
 const appTheme = {
   ...MD3LightTheme,
@@ -35,12 +44,15 @@ const appTheme = {
   },
 };
 
+=======
+>>>>>>> origin/master
 const HomeScreen = ({navigation}: any) => (
   <ImageBackground
     source={require('./assets/images/background.jpeg')}
     style={styles.container}
     blurRadius={1}>
     <View style={styles.overlay}>
+<<<<<<< HEAD
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.homeContent}>
           <Text style={styles.mainTitle}>CarpetVision</Text>
@@ -70,36 +82,85 @@ const HomeScreen = ({navigation}: any) => (
           </Button>
         </View>
       </ScrollView>
+=======
+      <Card style={styles.transparentCard}>
+        <Card.Content>
+          <Title style={styles.title}>CarpetVision</Title>
+          <Paragraph style={styles.subtitle}>
+            Visualize carpets in your space with augmented reality
+          </Paragraph>
+          <Button
+            mode="contained"
+            onPress={() => navigation.navigate('CarpetSelection')}
+            style={styles.button}
+            labelStyle={styles.buttonLabel}
+            icon="cube-scan">
+            Start AR Experience
+          </Button>
+        </Card.Content>
+      </Card>
+>>>>>>> origin/master
     </View>
   </ImageBackground>
 );
 
 const App = () => {
   return (
+<<<<<<< HEAD
     <PaperProvider theme={appTheme}>
       <BasketProvider>
         <NavigationContainer>
           <Stack.Navigator>
+=======
+    <PaperProvider>
+      <BasketProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              header: ({navigation}) => (
+                <Appbar.Header>
+                  <Appbar.BackAction onPress={() => navigation.goBack()} />
+                  <Appbar.Content title="CarpetVision" />
+                </Appbar.Header>
+              ),
+            }}>
+>>>>>>> origin/master
             <Stack.Screen
               name="Home"
               component={HomeScreen}
               options={{headerShown: false}}
             />
             <Stack.Screen
+<<<<<<< HEAD
               name="CarpetSelection"
               component={CarpetSelectionScreen}
               options={{title: 'Select a Carpet'}}
             />
+=======
+              name="Basket"
+              component={BasketScreen}
+              options={{title: 'Your Basket'}}
+            />
+            <Stack.Screen
+              name="CarpetSelection"
+              component={CarpetSelectionScreen}
+              options={{title: 'Select Carpet'}}
+            />
+
+>>>>>>> origin/master
             <Stack.Screen
               name="ARCarpet"
               component={ARCarpetViewer}
               options={{title: 'AR Viewer'}}
             />
+<<<<<<< HEAD
             <Stack.Screen
               name="Basket"
               component={BasketScreen}
               options={{title: 'Your Basket'}}
             />
+=======
+>>>>>>> origin/master
           </Stack.Navigator>
         </NavigationContainer>
       </BasketProvider>
@@ -113,6 +174,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
+<<<<<<< HEAD
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'center',
   },
@@ -179,3 +241,38 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+=======
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  transparentCard: {
+    backgroundColor: 'transparent',
+    elevation: 0,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
+    color: '#fff',
+  },
+  subtitle: {
+    textAlign: 'center',
+    marginBottom: 24,
+    fontSize: 16,
+    color: '#fff',
+  },
+  button: {
+    marginVertical: 16,
+    borderRadius: 8,
+    paddingVertical: 8,
+    backgroundColor: 'silver',
+  },
+  buttonLabel: {
+    fontSize: 16,
+  },
+});
+
+export default App;
+>>>>>>> origin/master

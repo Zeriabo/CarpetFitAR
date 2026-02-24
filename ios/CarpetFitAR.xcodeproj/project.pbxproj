@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+<<<<<<< HEAD
 		483BE2CCD670A554E15E7CCD /* libPods-CarpetFitAR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A288BA9865B3B3E5EDCC8003 /* libPods-CarpetFitAR.a */; };
+=======
+		3134343BF511D36519689445 /* libPods-CarpetFitAR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D4E9A82BBE8176936FF014 /* libPods-CarpetFitAR.a */; };
+>>>>>>> origin/master
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		DB46D7142DB9082B00953C51 /* carpet2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = DB46D7132DB9082B00953C51 /* carpet2.usdz */; };
@@ -20,11 +24,19 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = CarpetFitAR/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CarpetFitAR/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = CarpetFitAR/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		401F1C41006DC922E26899F6 /* Pods-CarpetFitAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarpetFitAR.debug.xcconfig"; path = "Target Support Files/Pods-CarpetFitAR/Pods-CarpetFitAR.debug.xcconfig"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = CarpetFitAR/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CarpetFitAR/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A288BA9865B3B3E5EDCC8003 /* libPods-CarpetFitAR.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarpetFitAR.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C90C740FC2E9C0F61FA78B40 /* Pods-CarpetFitAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarpetFitAR.release.xcconfig"; path = "Target Support Files/Pods-CarpetFitAR/Pods-CarpetFitAR.release.xcconfig"; sourceTree = "<group>"; };
+=======
+		5705DEB9F26DE068AA9ABE8E /* Pods-CarpetFitAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarpetFitAR.debug.xcconfig"; path = "Target Support Files/Pods-CarpetFitAR/Pods-CarpetFitAR.debug.xcconfig"; sourceTree = "<group>"; };
+		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = CarpetFitAR/AppDelegate.swift; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CarpetFitAR/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8EB2FED9FD055B591E10BFFF /* Pods-CarpetFitAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarpetFitAR.release.xcconfig"; path = "Target Support Files/Pods-CarpetFitAR/Pods-CarpetFitAR.release.xcconfig"; sourceTree = "<group>"; };
+		B0D4E9A82BBE8176936FF014 /* libPods-CarpetFitAR.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarpetFitAR.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+>>>>>>> origin/master
 		DB46D7132DB9082B00953C51 /* carpet2.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = carpet2.usdz; path = ../assets/models/carpet2.usdz; sourceTree = "<group>"; };
 		DB46D7152DB90B3F00953C51 /* carpet.glb */ = {isa = PBXFileReference; lastKnownFileType = file; name = carpet.glb; path = ../assets/models/carpet.glb; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -35,7 +47,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				483BE2CCD670A554E15E7CCD /* libPods-CarpetFitAR.a in Frameworks */,
+=======
+				3134343BF511D36519689445 /* libPods-CarpetFitAR.a in Frameworks */,
+>>>>>>> origin/master
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +75,11 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+<<<<<<< HEAD
 				A288BA9865B3B3E5EDCC8003 /* libPods-CarpetFitAR.a */,
+=======
+				B0D4E9A82BBE8176936FF014 /* libPods-CarpetFitAR.a */,
+>>>>>>> origin/master
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -96,8 +116,13 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				401F1C41006DC922E26899F6 /* Pods-CarpetFitAR.debug.xcconfig */,
 				C90C740FC2E9C0F61FA78B40 /* Pods-CarpetFitAR.release.xcconfig */,
+=======
+				5705DEB9F26DE068AA9ABE8E /* Pods-CarpetFitAR.debug.xcconfig */,
+				8EB2FED9FD055B591E10BFFF /* Pods-CarpetFitAR.release.xcconfig */,
+>>>>>>> origin/master
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -118,13 +143,22 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CarpetFitAR" */;
 			buildPhases = (
+<<<<<<< HEAD
 				890FF15F5E59FBDCD799B924 /* [CP] Check Pods Manifest.lock */,
+=======
+				5D64FD4E840A6EAC2DADB655 /* [CP] Check Pods Manifest.lock */,
+>>>>>>> origin/master
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+<<<<<<< HEAD
 				DC6A05D6A3DDD2B7D8EAE6EA /* [CP] Embed Pods Frameworks */,
 				BC63FC9715D42B1395CAF8C2 /* [CP] Copy Pods Resources */,
+=======
+				FB8F05A526F7E7E481B43420 /* [CP] Embed Pods Frameworks */,
+				6434D3E4B3D8AEC063EEB903 /* [CP] Copy Pods Resources */,
+>>>>>>> origin/master
 			);
 			buildRules = (
 			);
@@ -197,7 +231,11 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
+<<<<<<< HEAD
 		890FF15F5E59FBDCD799B924 /* [CP] Check Pods Manifest.lock */ = {
+=======
+		5D64FD4E840A6EAC2DADB655 /* [CP] Check Pods Manifest.lock */ = {
+>>>>>>> origin/master
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -219,7 +257,11 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+<<<<<<< HEAD
 		BC63FC9715D42B1395CAF8C2 /* [CP] Copy Pods Resources */ = {
+=======
+		6434D3E4B3D8AEC063EEB903 /* [CP] Copy Pods Resources */ = {
+>>>>>>> origin/master
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -236,7 +278,11 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CarpetFitAR/Pods-CarpetFitAR-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+<<<<<<< HEAD
 		DC6A05D6A3DDD2B7D8EAE6EA /* [CP] Embed Pods Frameworks */ = {
+=======
+		FB8F05A526F7E7E481B43420 /* [CP] Embed Pods Frameworks */ = {
+>>>>>>> origin/master
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -269,7 +315,11 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+<<<<<<< HEAD
 			baseConfigurationReference = 401F1C41006DC922E26899F6 /* Pods-CarpetFitAR.debug.xcconfig */;
+=======
+			baseConfigurationReference = 5705DEB9F26DE068AA9ABE8E /* Pods-CarpetFitAR.debug.xcconfig */;
+>>>>>>> origin/master
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -299,7 +349,11 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+<<<<<<< HEAD
 			baseConfigurationReference = C90C740FC2E9C0F61FA78B40 /* Pods-CarpetFitAR.release.xcconfig */;
+=======
+			baseConfigurationReference = 8EB2FED9FD055B591E10BFFF /* Pods-CarpetFitAR.release.xcconfig */;
+>>>>>>> origin/master
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

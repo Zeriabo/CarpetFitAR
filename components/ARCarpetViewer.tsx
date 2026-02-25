@@ -5,9 +5,10 @@ import {
   ActivityIndicator,
   Platform,
   ImageBackground,
+  Text,
+  Pressable,
 } from 'react-native';
 import {ArViewerView} from 'react-native-ar-viewer';
-import {Text, Button, Card} from 'react-native-paper';
 import RNFS from 'react-native-fs';
 
 // Local GLB files for Android, remote USDZ URLs for iOS
@@ -28,6 +29,15 @@ const modelMap: {[key: string]: {android: string; ios: string}} = {
 
 const ARCarpetViewer = ({route}: any) => {
   const {imageName} = route.params;
+  const isAndroid = Platform.OS === 'android';
+  const androidModel = isAndroid
+    ? String((Platform.constants as any)?.Model ?? '')
+    : '';
+  const androidSdk = isAndroid ? Number((Platform.constants as any)?.Version ?? 0) : 0;
+  const isKnownArCrashDevice =
+    isAndroid &&
+    androidSdk <= 29 &&
+    /moto g\(8\) power lite|moto g8 power lite|blackjack/i.test(androidModel);
   const [modelPath, setModelPath] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,6 +49,16 @@ const ARCarpetViewer = ({route}: any) => {
 
     const loadModel = async () => {
       try {
+        if (isKnownArCrashDevice) {
+          if (isMounted) {
+            setErrorMsg(
+              'AR is not supported on this Android device due to a GPU driver crash. Please try another device.',
+            );
+            setIsLoading(false);
+          }
+          return;
+        }
+
         const modelUrls = modelMap[imageName];
 
         if (!modelUrls) {
@@ -98,7 +118,7 @@ const ARCarpetViewer = ({route}: any) => {
     return () => {
       isMounted = false;
     };
-  }, [imageName, retryCount]);
+  }, [imageName, retryCount, isKnownArCrashDevice]);
 
   const handleRetry = () => {
     setRetryCount(prev => prev + 1);
@@ -114,20 +134,16 @@ const ARCarpetViewer = ({route}: any) => {
             style={styles.errorBg}
             blurRadius={2}>
             <View style={styles.errorOverlay}>
-              <Card style={styles.errorCard}>
-                <Card.Content style={styles.errorContent}>
+              <View style={styles.errorCard}>
+                <View style={styles.errorContent}>
                   <Text style={styles.errorIcon}>⚠️</Text>
                   <Text style={styles.errorTitle}>Unable to Load Model</Text>
                   <Text style={styles.errorMessage}>{errorMsg}</Text>
-                  <Button
-                    mode="contained"
-                    onPress={handleRetry}
-                    style={styles.retryButton}
-                    labelStyle={styles.retryLabel}>
-                    Try Again
-                  </Button>
-                </Card.Content>
-              </Card>
+                  <Pressable onPress={handleRetry} style={styles.retryButton}>
+                    <Text style={styles.retryLabel}>Try Again</Text>
+                  </Pressable>
+                </View>
+              </View>
             </View>
           </ImageBackground>
         </View>
@@ -158,13 +174,15 @@ const ARCarpetViewer = ({route}: any) => {
         <ArViewerView
           style={styles.arView}
           model={modelPath}
-          lightEstimation
-          manageDepth
+          // Android compatibility mode: avoid Filament GPU crashes
+          // seen on some MediaTek/PowerVR devices with HDR/depth paths.
+          lightEstimation={!isAndroid}
+          manageDepth={!isAndroid}
           allowRotate
           allowScale
           allowTranslate
-          disableInstructions={false}
-          disableInstantPlacement={false}
+          disableInstructions={isAndroid}
+          disableInstantPlacement={isAndroid}
           planeOrientation="horizontal"
           /*
           onStarted={() => console.log('AR Started')}
@@ -275,14 +293,16 @@ const styles = StyleSheet.create({
   },
   retryButton: {
     marginTop: 8,
-    paddingVertical: 4,
+    paddingVertical: 10,
     borderRadius: 8,
     backgroundColor: '#2C5F8D',
     width: '100%',
+    alignItems: 'center',
   },
   retryLabel: {
     fontSize: 14,
     fontWeight: '600',
+    color: '#FFFFFF',
   },
 
   // Empty State
